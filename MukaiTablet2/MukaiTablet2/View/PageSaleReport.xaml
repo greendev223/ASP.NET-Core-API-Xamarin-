@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:cmv="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common" 
+             x:Class="MukaiTablet2.View.PageSaleReport">
+    <d:ContentPage.BindingContext>
+        <vm:VmSaleReport/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="HorizontalOptions"  Value="End" />
+            <Setter Property="Color"  Value="{StaticResource ColorGray4}" />
+        </Style>
+
+        <cmv:IsInternetConnectPresenter x:Key="IsInternetConnectPresenter"/>
+        <cmv:BoolNegativeConverter x:Key="BoolNegativeConverter"/>
+        <cmv:BoolTaxPresenter x:Key="BoolTaxPresenter"/>
+
+    </ContentPage.Resources>
+    <Grid BackgroundColor="#CC000000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="{Binding StoreName}" FontSize="{StaticResource FontSizeLL}"/>
+            <Label Text="(入力金額:" FontSize="{StaticResource FontSizeLL}"/>
+            <Label Text="{Binding IsIncludeTax,Converter={StaticResource BoolTaxPresenter}}" FontSize="{StaticResource FontSizeLL}"/>
+            <Label Text=")" FontSize="{StaticResource FontSizeLL}"/>
+        </StackLayout>
+
+        <!--　< 年月日 > -->
+        <Grid Margin="0,0,0,0" Grid.Row="2">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="{StaticResource ColorPink}"/>
+                    <Setter Property="VerticalOptions" Value="Center"/>
+                    <Setter Property="HorizontalOptions" Value="Center"/>
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLL}"/>
+                </Style>
+            </Grid.Resources>
+            <StackLayout Margin="10,0,0,0" x:Name="stack_monthSelect" HorizontalOptions="Start" Orientation="Horizontal" VerticalOptions="Center">
+                <Grid>
+                    <Image WidthRequest="14" HeightRequest="14" Grid.Row="0" Source="{cmn:ImageResource MukaiTablet2.Images.left_arrow.png}"/>
+                    <Button Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandPrev}"/>
+                </Grid>
+                <Label Text="{Binding YyyyMm}" FontSize="{StaticResource FontSizeNormal}"/>
+                <Grid>
+                    <Image  WidthRequest="14" HeightRequest="14"  Grid.Row="0" Source="{cmn:ImageResource MukaiTablet2.Images.right_arrow.png}"/>
+                    <Button Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandNext}"/>
+                </Grid>
+            </StackLayout>
+            <Button FontSize="{StaticResource FontSizeNormal}" HorizontalOptions="End" x:Name="btn_send" Text="本部送信" IsEnabled="{Binding IsEnableInput}" Command="{Binding CommandSend}"/>
+        </Grid>
+
+        <!-- 日報リスト -->
+        <ScrollView  Grid.Row="3" >
+            <FlexLayout  
+             BindableLayout.ItemsSource="{Binding SaleItems}" 
+             IsEnabled="{Binding IsEnableInput}"
+            x:Name="flexLayout"
+             Wrap="Wrap"
+             VerticalOptions="Start"
+             Direction="Row"
+             HorizontalOptions="Center"
+             JustifyContent="Start"
+             AlignItems="Start"
+             AlignContent="Start">
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10" HeightRequest="90" WidthRequest="100" BackgroundColor="{StaticResource ColorGray3}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="{Binding Ymd}" HorizontalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                            <!--未入力-->
+                            <Grid Margin="10,20,10,20" Grid.Row="1" BackgroundColor="#ca5b4b" IsVisible="{Binding IsValid}" >
+                                <Label Text="未入力" HorizontalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                            </Grid>
+                            <!-- 店休 -->
+                            <Grid Margin="10,20,10,20" Grid.Row="1" BackgroundColor="{StaticResource ColorBlue}" IsVisible="{Binding IsHoliday}">
+                                <Label Text="店休" HorizontalOptions="Center" VerticalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                            </Grid>
+                            <!--入力済-->
+                            <Grid Grid.Row="1" IsVisible="{Binding IsDispValue}" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding Daysale , StringFormat='{0:N0}'}" HorizontalOptions="End" FontSize="{StaticResource FontSizeNormal}"/>
+                                <Label Grid.Row="1" Text="{Binding SumSale, StringFormat='{0:N0}'}" HorizontalOptions="End" FontSize="{StaticResource FontSizeNormal}" FontAttributes="Bold"/>
+                            </Grid>
+                            <Button Grid.RowSpan="2" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandSelect}"/>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </FlexLayout>
+        </ScrollView>
+        
+        <!--cover-->
+        <Grid Grid.RowSpan="4" IsVisible="{Binding IsInputDialogVisible}" BindingContext="{Binding SelectedItem}" BackgroundColor="Black" Opacity="0.7">
+            
+        </Grid>
+
+        <!-- ダイアログ -->
+        <Grid Grid.RowSpan="4" IsVisible="{Binding IsInputDialogVisible}" BindingContext="{Binding SelectedItem}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer  Command="{Binding CommandCancel}"/>
+            </Grid.GestureRecognizers>
+            <Grid Margin="{Binding SaleInputDialogMargin}" WidthRequest="400" HeightRequest="240" VerticalOptions="Center" HorizontalOptions="Center" RowSpacing="0">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandCancel1}"/>
+                </Grid.GestureRecognizers>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <BoxView  Grid.RowSpan="5"  BackgroundColor="#656565" CornerRadius="10" />
+                <Label Grid.Row="0" Text="売上日報" FontSize="{StaticResource FontSizeLL}" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Start"/>
+                <Label Grid.Row="1" Margin="0,0,0,0" Text="{Binding Ymd}" FontSize="{StaticResource FontSizeNormal}" HorizontalOptions="Center" VerticalOptions="Start"/>
+                <Grid Grid.Row="2" HorizontalOptions="Start"  WidthRequest="340">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="金額" HorizontalOptions="End" FontSize="{StaticResource FontSizeNormal}"/>
+                    <Entry HorizontalTextAlignment="End" Grid.Column="1" Text="{Binding Daysale , StringFormat='{0:N0}'}" BackgroundColor="{StaticResource ColorGray5}" Keyboard="Numeric"/>
+                </Grid>
+                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Start" Margin="106,5,0,0">
+                    <CheckBox IsChecked="{Binding IsHoliday}"/>
+                    <Label Margin="-10,0,0,0" Text="店舗休日" FontSize="{StaticResource FontSizeNormal}"/>
+                   
+                </StackLayout>
+                <Grid Grid.Row="4" Margin="20,10" ColumnSpacing="0">
+                    <Grid.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="CornerRadius" Value="3"/>
+                            <Setter Property="VerticalOptions" Value="Center"/>
+                            <Setter Property="HorizontalOptions" Value="Center"/>
+                            <Setter Property="WidthRequest" Value="90"/>
+                            <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" BackgroundColor="Red" Text="削除" TextColor="{StaticResource ColorGray6}" Command="{Binding CommandDelete}" />
+                    <Button Grid.Column="2" BackgroundColor="{StaticResource ColorGray6}" Text="確定" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandAccept}" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <cmn:ViewActivityIndicator IsVisible="{Binding IsBussy}"    Grid.RowSpan="4"/>
+    </Grid>
+
+
+
+</local:PageBase>

@@ -1,0 +1,150 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\SearchList.cs" />
+    <Compile Remove="ViewModel\await.cs" />
+    <Compile Remove="ViewModel\VmProducts.cs" />
+    <Compile Remove="View\PageProduct Image.xaml.cs" />
+    <Compile Remove="View\PageProducts.xaml.cs" />
+    <Compile Remove="View\ViewOrderItem.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="View\PageProduct Image.xaml" />
+    <EmbeddedResource Remove="View\PageProducts.xaml" />
+    <EmbeddedResource Remove="View\ViewOrderItem.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\back.png" />
+    <None Remove="Images\download.png" />
+    <None Remove="Images\expand.png" />
+    <None Remove="Images\favorite.png" />
+    <None Remove="Images\force_download.png" />
+    <None Remove="Images\infomation.png" />
+    <None Remove="Images\initialize.png" />
+    <None Remove="Images\ledger.png" />
+    <None Remove="Images\left_arrow.png" />
+    <None Remove="Images\logout.png" />
+    <None Remove="Images\order_cart.png" />
+    <None Remove="Images\order_history.png" />
+    <None Remove="Images\report.png" />
+    <None Remove="Images\right_arrow.png" />
+    <None Remove="Images\search.png" />
+    <None Remove="Images\setting.png" />
+    <None Remove="Images\trashbox.png" />
+    <None Remove="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\left_arrow.png" />
+    <EmbeddedResource Include="Images\right_arrow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\back.png" />
+    <EmbeddedResource Include="Images\download.png" />
+    <EmbeddedResource Include="Images\expand.png" />
+    <EmbeddedResource Include="Images\favorite.png" />
+    <EmbeddedResource Include="Images\force_download.png" />
+    <EmbeddedResource Include="Images\infomation.png" />
+    <EmbeddedResource Include="Images\initialize.png" />
+    <EmbeddedResource Include="Images\ledger.png" />
+    <EmbeddedResource Include="Images\logout.png" />
+    <EmbeddedResource Include="Images\order_cart.png" />
+    <EmbeddedResource Include="Images\order_history.png" />
+    <EmbeddedResource Include="Images\report.png" />
+    <EmbeddedResource Include="Images\search.png" />
+    <EmbeddedResource Include="Images\setting.png" />
+    <EmbeddedResource Include="Images\trashbox.png" />
+    <EmbeddedResource Include="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Parsers" Version="6.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\Common\ViewHeader.xaml.cs">
+      <DependentUpon>ViewHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\PageTop.xaml.cs">
+      <DependentUpon>PageTop.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\PageDownload.xaml.cs">
+      <DependentUpon>PageDownload.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="View\Common\ViewActivityIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Common\ViewHeader.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Common\ViewIndexBox.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Common\ViewNumSelector.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Common\ViewProduct.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageFavorite.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageIndex.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageItemSelect.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageOrderCart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageOrderHistory.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageProduct.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageSaleReport.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageSearch.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageSetting.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageTop.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageDownload.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageLogin.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\ViewOrderHistItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vc="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"       
+             x:Class="MukaiTablet2.View.PageOrderCart">
+
+    <d:ContentPage.BindingContext>
+        <vm:VmOrderCart/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vc:BooleanInverter x:Key="BooleanInverter"/>
+        </ResourceDictionary>        
+    </ContentPage.Resources>
+
+
+    <Grid BackgroundColor="{StaticResource ColorGray1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!-- サマリ -->
+            <RowDefinition Height="auto"/>
+            <!-- 商品情報 -->
+            <RowDefinition Height="*"/>
+            <!-- ボタン -->
+            <RowDefinition Height="70"/>
+
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+        <!--編集オードのヘッダバー-->
+        <Grid IsVisible="{Binding IsEditMode}">
+            <Grid.Resources>
+                <Style TargetType="Grid">
+                    <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+                    <Setter Property="Padding" Value="0,4"/>
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="Title"/>
+                    <Setter Property="HorizontalOptions"  Value="Center"/>
+                    <Setter Property="VerticalOptions"  Value="Center"/>
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+                </Style>
+                <Style TargetType="ImageButton">
+                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                    <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label FontFamily="{DynamicResource MaterialFontFamily}" Text="&#xF0156;" FontSize="{StaticResource FontSizeLLL}" />
+            <Button Style="{StaticResource StyleTransparentButton}" Grid.Column="0" IsVisible="{Binding UseSubMenu}" Command="{Binding CommandEndEdit}" />
+
+
+            <Label Grid.Column="1" Text="削除選択" />
+
+            <Label Grid.Column="2" Text="&#xF0A7A;" FontFamily="{DynamicResource MaterialFontFamily}" IsVisible="{Binding HasChecked}" FontSize="{StaticResource FontSizeLLL}"/>
+            <Button Style="{StaticResource StyleTransparentButton}" Grid.Column="2" IsVisible="{Binding UseSubMenu}" Command="{Binding CommandDeleteSelected}" />
+            <Label Grid.Column="3" Text="&#xF01D9;" FontFamily="{DynamicResource MaterialFontFamily}" IsVisible="{Binding UseSubMenu}" FontSize="{StaticResource FontSizeLLL}"/>
+            <Button Style="{StaticResource StyleTransparentButton}" Grid.Column="3" IsVisible="{Binding UseSubMenu}" Command="{Binding CommandSubMenu}" />
+        </Grid>
+
+        <Grid Grid.Row="1" Padding="20" >
+            <BoxView BackgroundColor="{StaticResource ColorGray3}"  HorizontalOptions="Fill" VerticalOptions="Fill" CornerRadius="10"/>
+
+            <!-- オーダ情報サマリ -->
+            <Grid Padding="10" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <!-- 発注ボタン -->
+                <Button Grid.Column="1" Grid.RowSpan="2" 
+                        Text="本部送信" FontSize="{StaticResource FontSizeL}" WidthRequest="100" 
+                        HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="{StaticResource ColorPink2}" 
+                        TextColor="{StaticResource ColorGray6}"
+                        Command="{Binding CommandOrder}"
+                        />
+
+
+                <!-- 個数計-->
+                <Grid Grid.Row="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="個数計:" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeL}" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Column="1" Text="{Binding TotalOrderNum}" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeL}" HorizontalTextAlignment="End"/>
+                </Grid>
+                <!-- 金額計-->
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="金額計:" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeL}" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Column="1" Text="{Binding TotalPrice,StringFormat='￥{0:#,0}'}" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeL}" HorizontalTextAlignment="End"/>
+                </Grid>
+
+                <!--　品種集計 -->
+                <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Summaries}" HeightRequest="{Binding SummaryHeight}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="45" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding rname}" TextColor="{StaticResource ColorGray6}" VerticalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                                <Label Grid.Column="1" Text="{Binding qty,StringFormat='x{0}'}" TextColor="{StaticResource ColorGray6}" VerticalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                                <Label Grid.Column="2" Text="{Binding price,StringFormat='￥{0:#,0}'}" TextColor="{StaticResource ColorGray6}" VerticalOptions="Center" FontSize="{StaticResource FontSizeNormal}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+
+        <!--商品情報 -->
+        <Grid Grid.Row="2" Padding="20,0">
+            <CollectionView ItemsSource="{Binding OrderList}" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <BoxView Grid.ColumnSpan="2" Grid.RowSpan="2" BackgroundColor="{StaticResource ColorGray3}" CornerRadius="10"/>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Grid.Resources>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="VerticalOptions" Value="Start"/>
+                                        <Setter Property="HorizontalOptions"  Value="Start"/>
+                                        <Setter Property="Color" Value="{StaticResource ColorGray3}"/>
+                                        <Setter Property="Margin" Value="15"/>
+                                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Image  Source="{Binding Image}" VerticalOptions="CenterAndExpand" HeightRequest="140" HorizontalOptions="CenterAndExpand" Margin="10" BackgroundColor="White" WidthRequest="200" />
+                                <!--親のVmのプロパティを参照-->
+                                <CheckBox IsChecked="{Binding IsChecked}" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type vm:VmOrderCart}}, Path=IsEditMode}">
+                                    <CheckBox.Scale>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="Android" Value="2.0"/>
+                                            <On Platform="UWP" Value="1.0"/>
+                                        </OnPlatform>
+                                    </CheckBox.Scale>
+                                </CheckBox>
+                            </Grid>
+                            <Grid Grid.Column="1" IsVisible="{Binding IsSmartPhone,Converter={StaticResource BooleanInverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Text="{Binding DpGname1}" TextColor="{StaticResource ColorGray6}" HorizontalOptions="Start" VerticalOptions="Center" FontSize="{StaticResource FontSizeLL}"/>
+                                <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="0" HorizontalOptions="Start" VerticalOptions="Start"  >
+                                    <StackLayout.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                                        </Style>
+                                    </StackLayout.Resources>
+                                    <Label Text="{Binding MakerNo}" />
+                                    <Label Text="("/>
+                                    <Label Text="{Binding Vecode}" />
+                                    <Label Text=")"/>
+                                </StackLayout>
+                                <Label Grid.Row="2" Text="{Binding Upprice,StringFormat='￥{0:#,0}'}"  FontSize="{StaticResource FontSizeLL}" TextColor="{StaticResource ColorGray6}"/>
+
+
+                                <Label Grid.Column="1"  Grid.Row="0" Text="&#xF0A7A;" FontFamily="{DynamicResource MaterialFontFamily}" VerticalOptions="End"  HorizontalOptions="Center" Margin="5" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeLLLL}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CommandDelete}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <!-- <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandDelete}" />-->
+                                <cmn:ViewNumSelector  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" CommandMinus="{Binding CommandMinus}" CommandPlus="{Binding CommandPlus}" Num="{Binding OrderedNum}" />
+                            </Grid>
+                            <Grid Grid.Column="1" IsVisible="{Binding IsSmartPhone}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label  Grid.Row="0" Text="&#xF0A7A;" FontFamily="{DynamicResource MaterialFontFamily}" VerticalOptions="End"  HorizontalOptions="End" Margin="5" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeLLLL}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CommandDelete}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <!-- <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandDelete}" />-->
+                                <cmn:ViewNumSelector  Grid.Row="1" Grid.RowSpan="2" CommandMinus="{Binding CommandMinus}" CommandPlus="{Binding CommandPlus}" Num="{Binding OrderedNum}" />
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding IsSmartPhone}" Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Text="{Binding DpGname1}" TextColor="{StaticResource ColorGray6}" HorizontalOptions="Start" VerticalOptions="Center" FontSize="{StaticResource FontSizeLL}"/>
+                                <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="0" HorizontalOptions="Start" VerticalOptions="Start"  >
+                                    <StackLayout.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                                        </Style>
+                                    </StackLayout.Resources>
+                                    <Label Text="{Binding MakerNo}" />
+                                    <Label Text="("/>
+                                    <Label Text="{Binding Vecode}" />
+                                    <Label Text=")"/>
+                                </StackLayout>
+                                <Label Grid.Row="1" HorizontalOptions="End" Text="{Binding Upprice,StringFormat='￥{0:#,0}'}"  FontSize="{StaticResource FontSizeLL}" TextColor="{StaticResource ColorGray6}"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+
+
+
+</local:PageBase>

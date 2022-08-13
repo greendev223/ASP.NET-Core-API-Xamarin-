@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:BackgroundColor="{StaticResource ColorGray3}"
+             x:Class="MukaiTablet2.View.Common.ViewNumSelector">
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="Default"/>
+        </Style>
+    </ContentView.Resources>
+    <Grid x:Name="GridMain" VerticalOptions="Center" HorizontalOptions="Center" ColumnSpacing="1" Padding="3" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="0" BackgroundColor="Transparent"  WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+            <Image.Source>
+                <FontImageSource Color="{StaticResource ColorGray5}"  FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF06F2;" />
+            </Image.Source>
+        </Image>
+
+        <Button  x:Name="BtnMinus" Grid.Column="0" Style="{StaticResource StyleTransparentButton}"/>
+
+        <Grid  Grid.Column="1" BackgroundColor="{StaticResource ColorGray6}">
+            <BoxView  BackgroundColor="{StaticResource ColorGray3}" Margin="2"/>
+            <Label x:Name="LblNum"  d:Text="10" FontSize="{StaticResource FontSizeLL}" />
+        </Grid>
+
+        <Image Grid.Column="2" BackgroundColor="Transparent"  WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+            <Image.Source>
+                <FontImageSource Color="{StaticResource ColorGray5}"  FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0704;" />
+            </Image.Source>
+        </Image>
+        <Button x:Name="BtnPlus" Grid.Column="2" Style="{StaticResource StyleTransparentButton}"/>
+
+    </Grid>
+
+</ContentView>

@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vc="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="MukaiTablet2.View.PageSearch">
+    <d:ContentPage.BindingContext>
+        <vm:VmSearch/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vc:BooleanInverter x:Key="BooleanInverter"/>
+        </ResourceDictionary>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Start"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BorderColor" Value="{StaticResource ColorGray4}"/>
+            <Setter Property="BorderWidth" Value="3"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray1}"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        
+
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource ColorGray1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+        <Expander Grid.Row="1" IsExpanded="{Binding IsConditionVisible}">
+            <Expander.Header>
+                <StackLayout Orientation="Horizontal" Margin="10">
+                    <StackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="{StaticResource FontSizeL}"/>
+                            <Setter Property="TextColor" Value="{StaticResource ColorGray5}" />
+                        </Style>
+                    </StackLayout.Resources>
+                    <Label FontFamily="{DynamicResource MaterialFontFamily}" Text="&#xF084D;" IsVisible="{Binding IsConditionVisible}" VerticalOptions="Center" FontSize="{StaticResource FontSizeLL}"/> <!--とじる-->
+                    <Label FontFamily="{DynamicResource MaterialFontFamily}" Text="&#xF084F;" IsVisible="{Binding IsConditionVisible,Converter={StaticResource BooleanInverter}}" VerticalOptions="Center" FontSize="{StaticResource FontSizeLL}"/>
+                    <!-- <Label Text="{Binding ConditionExpandMark}"/> -->
+                    <Label Text="検索条件"/>
+                </StackLayout>
+            </Expander.Header>
+            <ScrollView>
+                <Grid RowSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"  Text="キーワード"/>
+                    <Entry Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Keyword}" Placeholder="気になるキーワードを入力して検索"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="価格"/>
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Keyboard="Numeric" Grid.Column="0" Text="{Binding PriceLowerLimit}"/>
+                        <Label Grid.Column="1" Text="～" HorizontalOptions="Center"/>
+                        <Entry Keyboard="Numeric" Grid.Column="2" Text="{Binding PriceUpperLimit}"/>
+                    </Grid>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="素材" />
+                    <Label Grid.Row="2" Grid.Column="1" Text="素材を選択" TextColor="{StaticResource ColorBlue}" TextDecorations="Underline" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandMaterial}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <CollectionView  Grid.Row="2" Grid.Column="2" ItemsSource="{Binding SelectedMaterials}" HeightRequest="{Binding MaterialsHeight}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="{Binding SelectedItemsColNum}" VerticalItemSpacing="0"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Center" HeightRequest="45">
+                                    <Label Text="{Binding .}" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+                    <Label Grid.Row="3" Grid.Column="0" Text="デザイン"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="デザインを選択" TextColor="{StaticResource ColorBlue}" TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandShape}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <CollectionView  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SelectedShapes}" HeightRequest="{Binding ShapesHeight}" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="{Binding SelectedItemsColNum}" VerticalItemSpacing="0"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Center" HeightRequest="45">
+                                    <Label Text="{Binding .}" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Grid.Row="4" Grid.Column="0" Text="個別分類１"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="個別分類１を選択" TextColor="{StaticResource ColorBlue}" TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandSecName1}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <CollectionView  Grid.Row="4" Grid.Column="2" ItemsSource="{Binding SelectedSecNames1}" HeightRequest="{Binding SecNames1Height}" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="{Binding SelectedItemsColNum}" VerticalItemSpacing="0"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Center" HeightRequest="45">
+                                    <Label Text="{Binding .}" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Grid.Row="5" Grid.Column="0" Text="個別分類２"/>
+                    <Label Grid.Row="5" Grid.Column="1" Text="個別分類２を選択" TextColor="{StaticResource ColorBlue}" TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandSecName2}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <CollectionView  Grid.Row="5" Grid.Column="2" ItemsSource="{Binding SelectedSecNames2}" HeightRequest="{Binding SecNames2Height}" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="{Binding SelectedItemsColNum}" VerticalItemSpacing="0"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Center" HeightRequest="45">
+                                    <Label Text="{Binding .}" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Grid.Row="6" Grid.Column="0" Text="個別分類３"/>
+                    <Label Grid.Row="6" Grid.Column="1" Text="個別分類３を選択" TextColor="{StaticResource ColorBlue}" TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CommandSecName3 }"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <CollectionView  Grid.Row="6" Grid.Column="2" ItemsSource="{Binding SelectedSecNames3}" HeightRequest="{Binding SecNames3Height}" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="{Binding SelectedItemsColNum}" VerticalItemSpacing="0"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Center" HeightRequest="45">
+                                    <Label Text="{Binding .}" VerticalOptions="Center" LineBreakMode="TailTruncation" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+                    <Button Grid.Row="7" Grid.Column="1" Text="検索" WidthRequest="120" HorizontalOptions="End" Margin="0,0,10,0" Command="{Binding CommandSearch}" />
+
+                </Grid>
+            </ScrollView>
+        </Expander>
+
+        <Label Grid.Row="2" Text="検索結果" FontSize="{StaticResource FontSizeL}" TextColor="{StaticResource ColorGray5}" />
+        <!-- INDEX -->
+        <CollectionView Grid.Row="3" ItemsSource="{Binding IndexList}"  HeightRequest="{Binding IndexListHeight}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal" Span="1"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid WidthRequest="200">
+                        <cmn:ViewIndexBox BindName="{Binding IdxName}" BindColor="{Binding TagColor}" BindCommand="{Binding Command}" Padding="2"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <!-- 商品 -->
+        <Grid Grid.Row="4" SizeChanged="ProductArea_SizeChanged" >
+            <flv:FlowListView
+                IsVisible="{Binding IsAndroid}"
+                FlowColumnCount="{Binding ProductColNum}"
+                SeparatorVisibility="None"
+                FlowItemsSource="{Binding ProductList}"
+                HorizontalOptions="FillAndExpand"
+                RowHeight="140">
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Grid
+                            RowSpacing="0"
+                            ColumnSpacing="0">
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" HorizontalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
+            <!--<CollectionView ItemsSource="{Binding ProductList}" IsVisible="{Binding IsAndroid}"  >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{Binding ProductColNum}"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+
+            <CollectionView ItemsSource="{Binding ProductList}" IsVisible="{Binding IsUWP}" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"  Span="{Binding ProductRowNum}"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" VerticalOptions="Start" HorizontalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <cmn:ViewActivityIndicator IsVisible="{Binding IsBussy}" Grid.Row="0" Grid.RowSpan="5"/>
+
+    </Grid>
+</local:PageBase>

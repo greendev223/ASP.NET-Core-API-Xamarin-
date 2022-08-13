@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://muk.nxccloud.net/muksvc/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://muk.nxccloud.net/muksvc/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://muk.nxccloud.net/muksvc/">
+      <s:element name="GetIndex">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIndexResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIndexResult" type="tns:ArrayOfIndex" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfIndex">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="index" nillable="true" type="tns:index" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="index">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="joinm_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="joinm_grp" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_p_seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_c_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="joinm_c_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_c_line" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_pt_seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="joinm_entdatetime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="grp" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="t_level" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="idx_k" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="idx_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idx_name_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idx_fcolor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idx_bcolor" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="page_wnum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="image_hper" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="image_vper" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_fcolor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_bcolor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_hremark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_tremark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_hremark_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="page_tremark_e" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="goods_num" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="open_flag" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="open_ymd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="excode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="exname" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="entdatetime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="chgdatetime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetJoinm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJoinmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetJoinmResult" type="tns:ArrayOfJoinm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfJoinm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="joinm" nillable="true" type="tns:joinm" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="joinm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="grp" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="c_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="c_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="c_line" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="pt_seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="entdatetime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="chgymd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="chgtime" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEnd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nocache" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEndResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEndResult" type="tns:ArrayOfEnd" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEnd">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="end" nillable="true" type="tns:end" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="end">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ymd" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nocache" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOosResult" type="tns:ArrayOfOos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="oos" nillable="true" type="tns:oos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="oos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ymd" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nocache" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResResult" type="tns:ArrayOfRes" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="res" nillable="true" type="tns:res" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="res">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ave_qty" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopnum" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="avg_string" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGoods">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoodsResult" type="tns:ArrayOfGoods" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGoods">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="goods" nillable="true" type="tns:goods" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="goods">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="p" type="tns:goods_p" />
+          <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:goods_c" />
+          <s:element minOccurs="0" maxOccurs="1" name="end" type="tns:end" />
+          <s:element minOccurs="0" maxOccurs="1" name="oos" type="tns:oos" />
+          <s:element minOccurs="0" maxOccurs="1" name="res" type="tns:res" />
+          <s:element minOccurs="0" maxOccurs="1" name="lim" type="tns:lim" />
+          <s:element minOccurs="0" maxOccurs="1" name="acc" type="tns:acc" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="gcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="jank" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="jancode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="image_datetime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="image_name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="image_serveruri" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="image_localuri" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isend" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isoos" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="islim" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isacc" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="bookmark" type="tns:bookmark" />
+          <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:req" />
+          <s:element minOccurs="1" maxOccurs="1" name="isbookmark" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isorder" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="dp_gname1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dp_gname2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="hasChild" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isorderOK" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isnew" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="iscache" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="searchtext" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="goods_p">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="gcode1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="g2cnt" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="dtk" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="makerno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="gname1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="uremark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="gname1_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="uremark_e" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="upprice" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="upprice_e" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ship_ent" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="jank" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="jancode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="jpg_no" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="jpg_ymd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="jpg_time" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="jpg_size" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="rcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="net" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="kicode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="clcode1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="clcode2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="mtcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="decode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="seccode1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="seccode2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="seccode3" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="rname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rname_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="netname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="kiname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="kiname_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clname1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clname2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clname1_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clname2_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mtname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dename" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="secname1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="secname2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="secname3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="vecode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="page_no" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="tname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tname_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lmcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="xtxt1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="entdatetime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="chgdatetime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="goods_c">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="seqno" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="gcode1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="gcode2" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="gname2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="gname2_e" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="jank" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="jancode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="entdatetime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="chgdatetime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="lim">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="lmcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ymd_s" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ymd_e" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="acc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="g_seqno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ymd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="qty" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="nos_num" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="bookmark">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="goods" type="tns:goods" />
+          <s:element minOccurs="1" maxOccurs="1" name="ymd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ordersuryo" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="isbookmark" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="i_seqno" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="req">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="h_id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="vid" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ymd" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="pcname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="h_opt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="h_opt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="bkk" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="goods" type="tns:goods" />
+          <s:element minOccurs="1" maxOccurs="1" name="gcode1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="gcode2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="qty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="r_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="bodycount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGoodsfull">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsfullResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoodsfullResult" type="tns:ArrayOfGoods" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsSeqAndMakerno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="seqno" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="makerno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsSeqAndMakernoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoodsSeqAndMakernoResult" type="tns:ArrayOfGoods" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsGcode1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gcode1" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGoodsGcode1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGoodsGcode1Result" type="tns:ArrayOfGoods" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrency">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyResult" type="tns:ArrayOfCurrency" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCurrency">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="currency" nillable="true" type="tns:currency" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="currency">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cur" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDelResult" type="tns:ArrayOfDel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="del" nillable="true" type="tns:del" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="del">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStoreResult" type="tns:ArrayOfStore" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStore">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="store" nillable="true" type="tns:store" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="store">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ocrcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="umcode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ubcode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="umcname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sdcname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="umcname_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sdcname_e" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt_1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt_2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLim">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLimResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLimResult" type="tns:ArrayOfLim" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLim">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="lim" nillable="true" type="tns:lim" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAcc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nochace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccResult" type="tns:ArrayOfAcc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAcc">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="acc" nillable="true" type="tns:acc" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReqResult" type="tns:ArrayOfReq" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReq">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="req" nillable="true" type="tns:req" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="reqs" type="tns:ArrayOfReq" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetReqResult" type="tns:returninfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="returninfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="status" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="other1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="other2" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="option1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="option2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBookmark">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookmarkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookmarkResult" type="tns:ArrayOfBookmark" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBookmark">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="bookmark" nillable="true" type="tns:bookmark" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetBookmark">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookmarks" type="tns:ArrayOfBookmark" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetBookmarkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetBookmarkResult" type="tns:returninfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderHistoryResult" type="tns:ArrayOfOrderhistory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrderhistory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="orderhistory" nillable="true" type="tns:orderhistory" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="orderhistory">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="senddate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="reqs" type="tns:ArrayOfReq" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetOrderHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="orderhistorylist" type="tns:ArrayOfOrderhistory" />
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetOrderHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetOrderHistoryResult" type="tns:returninfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shopmark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSalResult" type="tns:ArrayOfBookmark" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetSal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sals" type="tns:ArrayOfSal" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sal" nillable="true" type="tns:sal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="h_id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="yymm" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="acc_tax" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="sysymd" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="pcname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="h_opt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="h_opt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ymd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="daysale" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="sumsale" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="holiday" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="valid" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="opt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="t_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="bodycount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="t_opt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="t_opt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetSalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetSalResult" type="tns:returninfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenbanTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mkk" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="shopcode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="csvUserDir" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenbanTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRenbanTestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderHistoryDays">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOrderHistoryDaysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOrderHistoryDaysResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSalUpdateDays">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSalUpdateDaysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetSalUpdateDaysResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetLogWrite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="txt" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetLogWriteResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetIndexSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIndex" />
+  </wsdl:message>
+  <wsdl:message name="GetIndexSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIndexResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJoinmSoapIn">
+    <wsdl:part name="parameters" element="tns:GetJoinm" />
+  </wsdl:message>
+  <wsdl:message name="GetJoinmSoapOut">
+    <wsdl:part name="parameters" element="tns:GetJoinmResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEndSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEnd" />
+  </wsdl:message>
+  <wsdl:message name="GetEndSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEndResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOos" />
+  </wsdl:message>
+  <wsdl:message name="GetOosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRes" />
+  </wsdl:message>
+  <wsdl:message name="GetResSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGoods" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGoodsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsfullSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGoodsfull" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsfullSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGoodsfullResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsSeqAndMakernoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGoodsSeqAndMakerno" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsSeqAndMakernoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGoodsSeqAndMakernoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsGcode1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetGoodsGcode1" />
+  </wsdl:message>
+  <wsdl:message name="GetGoodsGcode1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetGoodsGcode1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrencySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrency" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrencySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDel" />
+  </wsdl:message>
+  <wsdl:message name="GetDelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStore" />
+  </wsdl:message>
+  <wsdl:message name="GetStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLimSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLim" />
+  </wsdl:message>
+  <wsdl:message name="GetLimSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLimResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAcc" />
+  </wsdl:message>
+  <wsdl:message name="GetAccSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReqSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReq" />
+  </wsdl:message>
+  <wsdl:message name="GetReqSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReqResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetReqSoapIn">
+    <wsdl:part name="parameters" element="tns:SetReq" />
+  </wsdl:message>
+  <wsdl:message name="SetReqSoapOut">
+    <wsdl:part name="parameters" element="tns:SetReqResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookmarkSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookmark" />
+  </wsdl:message>
+  <wsdl:message name="GetBookmarkSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookmarkResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetBookmarkSoapIn">
+    <wsdl:part name="parameters" element="tns:SetBookmark" />
+  </wsdl:message>
+  <wsdl:message name="SetBookmarkSoapOut">
+    <wsdl:part name="parameters" element="tns:SetBookmarkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetOrderHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:SetOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="SetOrderHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:SetOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSalSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSal" />
+  </wsdl:message>
+  <wsdl:message name="GetSalSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetSalSoapIn">
+    <wsdl:part name="parameters" element="tns:SetSal" />
+  </wsdl:message>
+  <wsdl:message name="SetSalSoapOut">
+    <wsdl:part name="parameters" element="tns:SetSalResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRenbanTestSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRenbanTest" />
+  </wsdl:message>
+  <wsdl:message name="GetRenbanTestSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRenbanTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderHistoryDaysSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderHistoryDays" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderHistoryDaysSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderHistoryDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSalUpdateDaysSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSalUpdateDays" />
+  </wsdl:message>
+  <wsdl:message name="GetSalUpdateDaysSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSalUpdateDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetLogWriteSoapIn">
+    <wsdl:part name="parameters" element="tns:SetLogWrite" />
+  </wsdl:message>
+  <wsdl:message name="SetLogWriteSoapOut">
+    <wsdl:part name="parameters" element="tns:SetLogWriteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="GetIndex">
+      <wsdl:input message="tns:GetIndexSoapIn" />
+      <wsdl:output message="tns:GetIndexSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJoinm">
+      <wsdl:input message="tns:GetJoinmSoapIn" />
+      <wsdl:output message="tns:GetJoinmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEnd">
+      <wsdl:input message="tns:GetEndSoapIn" />
+      <wsdl:output message="tns:GetEndSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOos">
+      <wsdl:input message="tns:GetOosSoapIn" />
+      <wsdl:output message="tns:GetOosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRes">
+      <wsdl:input message="tns:GetResSoapIn" />
+      <wsdl:output message="tns:GetResSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGoods">
+      <wsdl:input message="tns:GetGoodsSoapIn" />
+      <wsdl:output message="tns:GetGoodsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsfull">
+      <wsdl:input message="tns:GetGoodsfullSoapIn" />
+      <wsdl:output message="tns:GetGoodsfullSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsSeqAndMakerno">
+      <wsdl:input message="tns:GetGoodsSeqAndMakernoSoapIn" />
+      <wsdl:output message="tns:GetGoodsSeqAndMakernoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsGcode1">
+      <wsdl:input message="tns:GetGoodsGcode1SoapIn" />
+      <wsdl:output message="tns:GetGoodsGcode1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrency">
+      <wsdl:input message="tns:GetCurrencySoapIn" />
+      <wsdl:output message="tns:GetCurrencySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDel">
+      <wsdl:input message="tns:GetDelSoapIn" />
+      <wsdl:output message="tns:GetDelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStore">
+      <wsdl:input message="tns:GetStoreSoapIn" />
+      <wsdl:output message="tns:GetStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLim">
+      <wsdl:input message="tns:GetLimSoapIn" />
+      <wsdl:output message="tns:GetLimSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAcc">
+      <wsdl:input message="tns:GetAccSoapIn" />
+      <wsdl:output message="tns:GetAccSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReq">
+      <wsdl:input message="tns:GetReqSoapIn" />
+      <wsdl:output message="tns:GetReqSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetReq">
+      <wsdl:input message="tns:SetReqSoapIn" />
+      <wsdl:output message="tns:SetReqSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmark">
+      <wsdl:input message="tns:GetBookmarkSoapIn" />
+      <wsdl:output message="tns:GetBookmarkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBookmark">
+      <wsdl:input message="tns:SetBookmarkSoapIn" />
+      <wsdl:output message="tns:SetBookmarkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistory">
+      <wsdl:input message="tns:GetOrderHistorySoapIn" />
+      <wsdl:output message="tns:GetOrderHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetOrderHistory">
+      <wsdl:input message="tns:SetOrderHistorySoapIn" />
+      <wsdl:output message="tns:SetOrderHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSal">
+      <wsdl:input message="tns:GetSalSoapIn" />
+      <wsdl:output message="tns:GetSalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSal">
+      <wsdl:input message="tns:SetSalSoapIn" />
+      <wsdl:output message="tns:SetSalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRenbanTest">
+      <wsdl:input message="tns:GetRenbanTestSoapIn" />
+      <wsdl:output message="tns:GetRenbanTestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistoryDays">
+      <wsdl:input message="tns:GetOrderHistoryDaysSoapIn" />
+      <wsdl:output message="tns:GetOrderHistoryDaysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSalUpdateDays">
+      <wsdl:input message="tns:GetSalUpdateDaysSoapIn" />
+      <wsdl:output message="tns:GetSalUpdateDaysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLogWrite">
+      <wsdl:input message="tns:SetLogWriteSoapIn" />
+      <wsdl:output message="tns:SetLogWriteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIndex">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetIndex" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJoinm">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetJoinm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnd">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOos">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetOos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRes">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetRes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoods">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoods" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsfull">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsfull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsSeqAndMakerno">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsSeqAndMakerno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsGcode1">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsGcode1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrency">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetCurrency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDel">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetDel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStore">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLim">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetLim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAcc">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetAcc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReq">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetReq" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReq">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/SetReq" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmark">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetBookmark" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBookmark">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/SetBookmark" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistory">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOrderHistory">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/SetOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSal">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetSal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSal">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/SetSal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenbanTest">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetRenbanTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistoryDays">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetOrderHistoryDays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalUpdateDays">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/GetSalUpdateDays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLogWrite">
+      <soap:operation soapAction="http://muk.nxccloud.net/muksvc/SetLogWrite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIndex">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetIndex" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJoinm">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetJoinm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnd">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetEnd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOos">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetOos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRes">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetRes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoods">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoods" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsfull">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsfull" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsSeqAndMakerno">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsSeqAndMakerno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGoodsGcode1">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetGoodsGcode1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrency">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetCurrency" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDel">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetDel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStore">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLim">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetLim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAcc">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetAcc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReq">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetReq" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReq">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/SetReq" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmark">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetBookmark" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBookmark">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/SetBookmark" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistory">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetOrderHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOrderHistory">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/SetOrderHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSal">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetSal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetSal">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/SetSal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenbanTest">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetRenbanTest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderHistoryDays">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetOrderHistoryDays" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalUpdateDays">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/GetSalUpdateDays" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLogWrite">
+      <soap12:operation soapAction="http://muk.nxccloud.net/muksvc/SetLogWrite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://muk.nxccloud.net/TestWebService/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://muk.nxccloud.net/TestWebService/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

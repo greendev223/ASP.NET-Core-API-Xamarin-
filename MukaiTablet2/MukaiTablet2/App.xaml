@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MukaiTablet2.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--背景-->
+            <Color x:Key="ColorGray0" >#121212</Color>
+            <Color x:Key="ColorGray1" >#212121</Color>  
+            <!--ヘッダ-->
+            <Color x:Key="ColorGray2" >#3d3d3d</Color>  
+            <!--ボタン-->
+            <Color x:Key="ColorGray3" >#595959</Color>
+            <!--アイコン-->
+            <Color x:Key="ColorGray4" >#858585</Color>
+            <!--テキスト-->
+            <Color x:Key="ColorGray5" >#aeaeae</Color>
+            <Color x:Key="ColorGray6" >#e2e2e2</Color>
+
+            <Color x:Key="ColorPink" >#ce93da</Color>
+            <Color x:Key="ColorWhite" >#e7e7e7</Color>
+            <Color x:Key="ColorGreen" >#a5d6a8</Color>
+            <Color x:Key="ColorYellow" >#feca29</Color>
+            <Color x:Key="ColorPink2" >#ee9a9a</Color>
+            <Color x:Key="ColorBlue" >#5c99f8</Color>
+            <Color x:Key="ColorProgress" >#7c97e2</Color>
+
+
+            <x:Double x:Key="FontSizeNormal">14</x:Double>
+            <x:Double x:Key="FontSizeL">17</x:Double>
+            <x:Double x:Key="FontSizeLL">24</x:Double>
+            <x:Double x:Key="FontSizeLLL">32</x:Double>
+            <x:Double x:Key="FontSizeLLLL">40</x:Double>
+            <x:Double x:Key="FontSizeS">12</x:Double>
+
+            <Style x:Key="StyleTransparentButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+        <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Design Icons" />
+            <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+            <On Platform="UWP" Value="Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+        </OnPlatform>
+
+    </Application.Resources>
+</Application>

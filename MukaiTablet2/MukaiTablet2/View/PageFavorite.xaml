@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="MukaiTablet2.View.PageFavorite"
+             BackgroundColor="{StaticResource ColorGray1}">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource ColorGray1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+        <Grid Grid.RowSpan="2" IsVisible="{Binding IsInputDialogVisible}" BackgroundColor="Black" Opacity="0.3"/>
+
+        <Grid RowSpacing="0" Grid.Row="1" HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid  Margin="20,0,0,0" Grid.Row="0">
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="CornerRadius" Value="3"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                        <Setter Property="HorizontalOptions" Value="Center"/>
+                        <Setter Property="WidthRequest" Value="110"/>
+                        <Setter Property="HeightRequest" Value="40"/>
+                        <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="{Binding ListViewTitle}" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Start" />
+                <Button IsVisible="{Binding IsMoveFavoriteProduct}" Margin="0,0,20,0" HorizontalOptions="End" Grid.Column="2" BackgroundColor="{StaticResource ColorGray6}" Text="キャンセル" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandMoveCancel}" />
+                <Button IsVisible="{Binding IsMoveFavoriteProduct}" Margin="0,0,20,0" HorizontalOptions="End" Grid.Column="3" BackgroundColor="{StaticResource ColorGray6}" Text="確定" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandMoveFavoriteProduct}" />
+                <Label IsVisible="{Binding IsFavoriteProductVisible}" Margin="0,0,20,0" Grid.Column="3" Text="{Binding CurrentFavoriteProductCount}" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Start" />
+            </Grid>
+
+            <!--Favorite Folder list-->
+            <ListView IsVisible="{Binding IsFavoriteFolderVisible}" ItemsSource="{Binding FavoriteFolders}" Grid.Row="1" x:Name="listView_favorite_folder" ItemSelected="FavoriteFolderOnItemSelected" RowHeight="60">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    CommandParameter="{Binding FolderId}"
+                                    Clicked="OnChangeFavoriteFolderName"
+									Text="名前変更" />
+                                <MenuItem 
+                                     Clicked="OnDeleteFavoriteFolder"
+									CommandParameter="{Binding FolderId}"
+									Text="削除" 
+                                    IsDestructive="True" />
+
+                            </ViewCell.ContextActions>
+                            <Grid Margin="0,5,0,0" BackgroundColor="{Binding BackgroundColor}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="5,0,0,0" Grid.Column="0" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Image.Source>
+                                        <FontImageSource Color="{StaticResource ColorGray5}"  FontFamily="{DynamicResource Key=MaterialFontFamily}" Glyph="󰉖"/>
+                                    </Image.Source>
+                                </Image>
+                                <Label VerticalOptions="Center" Grid.Column="1" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2" Text="{Binding FolderName}" VerticalTextAlignment="Start" />
+                                <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2" Text="{Binding FavoriteProductCount}" VerticalTextAlignment="Start" />
+                                <Label Text="{Binding FolderId}" IsVisible="false" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2" VerticalTextAlignment="Start" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <flv:FlowListView
+                Grid.Row="1"
+                IsVisible="{Binding IsFavoriteProductVisible}"
+                FlowColumnCount="{Binding ProductColNum}"
+                SeparatorVisibility="None"
+                FlowItemsSource="{Binding FavoriteProducts}"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                RowHeight="200">
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5" HeightRequest="200" BackgroundColor="{StaticResource ColorGray2}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="{Binding Image}" BackgroundColor="White"/>
+                            <StackLayout Grid.Row="1" Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label HorizontalOptions="Start" VerticalOptions="Start" FontSize="Default" Text="{Binding DpGname1}" VerticalTextAlignment="Start" Grid.Column="0"/>
+                                    <Label HorizontalOptions="End" VerticalOptions="Start" FontSize="Default" Text="{Binding Upprice, StringFormat=' ¥{0:F0}'}" VerticalTextAlignment="Start" Grid.Column="1"/>
+                                </Grid>
+                                <Label HorizontalOptions="Start" VerticalOptions="Start" FontSize="Default" Text="{Binding ProductCode}" MaxLines="2" VerticalTextAlignment="Start" />
+                            </StackLayout>
+                            <ListView ItemSelected="FavoriteProductOnItemSelected" RowHeight="200" ItemsSource="{Binding ListBind}" x:Name="listView_favorite_product">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <ViewCell.ContextActions>
+                                                <MenuItem
+                                                    CommandParameter="{Binding .}"
+                                                    Clicked="OnChangeFolder"
+									                Text="移動" />
+                                                <MenuItem 
+                                                    Clicked="OnDeleteProduct"
+									                CommandParameter="{Binding .}"
+									                Text="削除" 
+                                                    IsDestructive="True" />
+                                            </ViewCell.ContextActions>
+                                            <Grid HeightRequest="200"/>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
+
+            <!-- ダイアログ -->
+            <Grid Grid.RowSpan="2" IsVisible="{Binding IsInputDialogVisible}">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandCancel}"/>
+                </Grid.GestureRecognizers>
+                <Grid Margin="{Binding SaleInputDialogMargin}" WidthRequest="300" HeightRequest="200" VerticalOptions="Center" HorizontalOptions="Center" RowSpacing="0">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding CommandCancel1}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <BoxView  Grid.RowSpan="3"  BackgroundColor="#656565" CornerRadius="10" />
+                    <Label Grid.Row="0" Text="{Binding InputDialogTitle}" FontSize="{StaticResource FontSizeLL}" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Start"/>
+                    <Grid Grid.Row="1" HorizontalOptions="Center" >
+                        <Entry WidthRequest="220" HorizontalTextAlignment="Start" Text="{Binding NewFolderName}" BackgroundColor="{StaticResource ColorGray5}" Keyboard="Text"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Margin="20,10" ColumnSpacing="0">
+                        <Grid.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="VerticalOptions" Value="Center"/>
+                                <Setter Property="HorizontalOptions" Value="Center"/>
+                                <Setter Property="WidthRequest" Value="110"/>
+                                <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" BackgroundColor="{StaticResource ColorGray6}" Text="キャンセル" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandDialogCancel}" />
+                        <Button Grid.Column="2" BackgroundColor="{StaticResource ColorGray6}" Text="確定" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandDialogCreate}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+
+    </Grid>
+</local:PageBase>

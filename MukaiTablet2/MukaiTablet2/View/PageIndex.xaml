@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vc="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="MukaiTablet2.View.PageIndex"
+             x:Name="this">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vc:BooleanInverter x:Key="BooleanInverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <d:PageBase.BindingContext>
+        <vm:VmIndex/>
+    </d:PageBase.BindingContext>
+    <Grid BackgroundColor="{StaticResource ColorGray0}" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+
+        <Grid Grid.Row="1">
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--パンくず -->
+            <Grid Grid.Column="0" Grid.Row="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style x:Key="DispBreadcrumb" TargetType="Label">
+                        <Setter Property="FontFamily" Value="{DynamicResource MaterialFontFamily}"/>
+                        <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                        <Setter Property="FontSize" Value="{StaticResource FontSizeLLLL}"/>
+                        <Setter Property="HeightRequest" Value="60"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                        <Setter Property="VerticalTextAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
+                
+                <!-- アンドロイドは縦スクロールなので パンくずを閉じれるようにする-->
+                
+                <Grid IsVisible="False">
+                    <Label  Style="{StaticResource DispBreadcrumb}" Text="&#xF09D8;" HorizontalOptions="End" Margin="3,0,0,0" IsVisible="{Binding IsDispBreadcrumb}" WidthRequest="40"/>
+                    <Label  Style="{StaticResource DispBreadcrumb}" Text="&#xF09DA;" HorizontalOptions="End" Margin="3,0,0,0" IsVisible="{Binding IsDispBreadcrumb,Converter={StaticResource BooleanInverter}}" WidthRequest="40"/>
+                    <Button Style="{StaticResource StyleTransparentButton}" Command="{Binding CommadDispBreadcrumb}" WidthRequest="40"/>
+                </Grid>
+
+                <StackLayout Grid.Row="1" 
+                        BackgroundColor="Transparent"
+                        BindableLayout.ItemsSource="{Binding Breadcrumb}"
+                        Orientation="Horizontal">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <!--<Label Text="{Binding Name}" BackgroundColor="{Binding BgColor}" Padding="4"/>-->
+                            <Button
+                                Text="{Binding Name}"
+                                FontSize="14"
+                                BackgroundColor="{Binding BgColor}"
+                                Command="{Binding Source={x:Reference this}, Path=BindingContext.LvBreadcrumb_ItemSelected}"
+                                CommandParameter="{Binding Name}"
+                                WidthRequest="65"
+                                HeightRequest="60"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                
+                <!--<ListView Grid.Row="1" ItemsSource="{Binding Breadcrumb}" ItemSelected ="LvBreadcrumb_ItemSelected" RowHeight="40" IsVisible="{Binding IsDispBreadcrumb}">
+                    <ListView.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="TextColor" Value="{StaticResource ColorGray0}"/>
+                            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                            <Setter Property="VerticalTextAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid >
+                                    <Label Text="{Binding Name}" BackgroundColor="{Binding BgColor}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+            </Grid>
+
+            <!--インデックス or 商品-->
+            <!-- リスト表示速度改善対応 -->
+            <flv:FlowListView
+                Grid.Column="0" Grid.Row="1"
+                FlowColumnCount="{Binding ProductColNum}"
+                SeparatorVisibility="None"
+                FlowItemsSource="{Binding ProductList}"
+                HorizontalOptions="FillAndExpand"
+                RowHeight="140">
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Grid
+                            RowSpacing="0"
+                            ColumnSpacing="0">
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" HorizontalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
+            <!--<CollectionView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ProductList}" WidthRequest="{Binding ProductListWidth}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"  Span="{Binding ProductColNum}"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" HorizontalOptions="Start"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+            
+            <!-- 全て縦スクロールにする 
+            <CollectionView Grid.Column="1" ItemsSource="{Binding ProductList}" IsVisible="{Binding IsUWP}" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="{Binding ProductRowNum}" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" VerticalOptions="Start"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            -->
+
+
+            <CollectionView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding IndexList}" IsVisible="{Binding IsIndexVisible}" >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{Binding IndexColNum}"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <cmn:ViewIndexBox BindName="{Binding IdxName}" BindColor="{Binding TagColor}" BindCommand="{Binding Command}" VerticalOptions="Center" HorizontalOptions="Start" Padding="10,10" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <cmn:ViewActivityIndicator IsVisible="{Binding IsBussy}" Grid.Row="1" />
+    </Grid>
+
+
+</local:PageBase>

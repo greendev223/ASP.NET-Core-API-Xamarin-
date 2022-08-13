@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"                
+             x:Class="MukaiTablet2.View.PageProduct">
+    <d:ContentPage.BindingContext>
+        <vmcmn:VmProduct/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="ColumnSpacing" Value="0"/>
+            <Setter Property="RowSpacing" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="StackLayout">
+            <Setter Property="Spacing" Value="0"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource ColorGray2}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!-- 画像 -->
+            <RowDefinition Height="500*"/>
+            <!-- 商品情報 -->
+            <RowDefinition Height="auto"/>
+            <!-- ボタン -->
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+
+        <Image Grid.Row="1" Source="{Binding Image}"  Aspect="AspectFit" BackgroundColor="White"/>
+        <Grid Grid.Row="1">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray0}" />
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLL}" />
+                </Style>
+            </Grid.Resources>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Gcode}" />
+                <Label Text="&lt;" />
+                <Label Text="{Binding MakerNo}" />
+                <Label Text="&gt;" />
+                <Label Text="(" />
+                <Label Text="{Binding Vecode}" />
+                <Label Text=")" />
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="1" HeightRequest="50" VerticalOptions="Start">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray0}" />
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeL}" />
+                    <Setter Property="VerticalOptions" Value="Center"/>
+                    <Setter Property="HorizontalOptions" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                <StackLayout.Resources>
+                    <Style TargetType="BoxView">
+                        <Setter Property="HeightRequest" Value="50"/>
+                        <Setter Property="WidthRequest" Value="50"/>
+                        <Setter Property="CornerRadius" Value="50"/>
+                        <Setter Property="VerticalOptions" Value="Start"/>
+                    </Style>
+                </StackLayout.Resources>
+                <Grid IsVisible="{Binding IsEnd}">
+                    <BoxView Color="#AAFF0000"/>
+                    <Label Text="廃番"/>
+                </Grid>
+                <Grid IsVisible="{Binding IsOos}">
+                    <BoxView Color="#AA0000FF"/>
+                    <Label Text="欠品"/>
+                </Grid>
+                <Grid IsVisible="{Binding IsLim}">
+                    <BoxView Color="#AAFF4500"/>
+                    <Label Text="制限"/>
+                </Grid>
+                <Grid IsVisible="{Binding IsAcc}">
+                    <BoxView Color="#AA008000"/>
+                    <Label Text="注残"/>
+                </Grid>
+            </StackLayout>
+        </Grid>
+        
+
+        <Grid Grid.Row="2" BackgroundColor="{StaticResource ColorGray3}" Padding="4" RowSpacing="3">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLL}"/>
+                </Style>
+               
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" Text="{Binding DpGname1}" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeLLL}" />
+            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Text="{Binding Upprice,StringFormat='￥{0:#,0}'}" TextColor="{StaticResource ColorGray6}" FontSize="{StaticResource FontSizeLLL}"  />
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical">
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                        <Setter Property="FontSize" Value="{StaticResource FontSizeL}"/>
+                    </Style>
+                </StackLayout.Resources>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsEnd}">
+                    <Label Text="{Binding EndYmd}"/>
+                    <Label Text="に廃番になりました。"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsOos}">
+                    <Label Text="{Binding OosYmd}" />
+                    <Label Text="以降、欠品しています。"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsLim}">
+                    <Label Text="出荷制限中です。"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsAcc}">
+                    <Label Text="{Binding AccYmd}"/>
+                    <Label Text="以降、"/>
+                    <Label Text="{Binding AccQty}"/>
+                    <Label Text="の受注残があります。欠品回数は"/>
+                    <Label Text="{Binding AccNosNum}"/>
+                    <Label Text="です。"/>
+                </StackLayout>
+            </StackLayout>
+
+        </Grid>
+
+        <Grid Grid.Row="3" Padding="20">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLL}"/>
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                    <Setter Property="HorizontalOptions" Value="Center"/>
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+                <Style TargetType="Picker">
+                    <Setter Property="BackgroundColor" Value="{StaticResource ColorGray4}"/>
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLL}"/>
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                    <Setter Property="HorizontalOptions" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Picker Grid.Column="0"  ItemsSource="{Binding OrderNumList}" SelectedItem="{Binding OrderNum}" WidthRequest="90" />
+            <Button Grid.Column="1" Text="注文する" BackgroundColor="{StaticResource ColorPink2}" WidthRequest="200" Command="{Binding CommandOrder}" IsEnabled="{Binding IsOrderOk}"/>
+            <Button Grid.Column="2" Text="☆" BackgroundColor="{StaticResource ColorYellow}" FontAttributes="Bold" WidthRequest="90" Command="{Binding CommandFavorite}"/>
+        </Grid>
+    </Grid>
+
+
+
+
+</local:PageBase>

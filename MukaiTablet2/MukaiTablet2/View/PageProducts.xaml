@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             x:Class="MukaiTablet2.View.PageProducts">
+    <d:PageBase.BindingContext>
+        <vm:VmProducts/>
+    </d:PageBase.BindingContext>
+    <Grid BackgroundColor="{StaticResource ColorGray0}" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListView Grid.Column="0" x:Name="LvBreadcrumb"  ItemsSource="{Binding Breadcrumb}" ItemSelected ="LvBreadcrumb_ItemSelected" RowHeight="50" >
+                <ListView.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                        <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                        <Setter Property="VerticalTextAlignment" Value="Center"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid >
+                                <Label Text="{Binding Name}" BackgroundColor="{StaticResource ColorGray2}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- インデックスの表示-->
+            <StackLayout Grid.Column="1">
+                <ScrollView>
+                    <StackLayout x:Name="SlBody" VerticalOptions="FillAndExpand">
+                        <StackLayout.Resources>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin" Value="5"/>
+                            </Style>
+                        </StackLayout.Resources>
+                        <!-- 中身はコードビハインドで動的に生成する-->
+                    </StackLayout>
+                </ScrollView>
+                <Button x:Name="DEBUG" Text="DEBUG" Clicked="DEBUG_Clicked"/>
+            </StackLayout>
+        </Grid>
+
+    </Grid>
+
+
+</local:PageBase>

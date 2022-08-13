@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"
+             BackgroundColor="{StaticResource ColorGray0}"
+             x:Class="MukaiTablet2.View.PageOrderHistory">
+    <d:ContentPage.BindingContext>
+        <vm:VmOrderHistory/>
+    </d:ContentPage.BindingContext>
+    <Grid BackgroundColor="{StaticResource ColorGray1}" VerticalOptions="Fill" HorizontalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <!-- 画像 -->
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+
+        <!-- 発注履歴 -->
+        <ScrollView x:Name="SvOrderHistList" Grid.Row="1" Margin="20" Orientation="Vertical">
+            <CollectionView ItemsSource="{Binding OrderHistItemList}"
+                            ItemsLayout="VerticalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ViewOrderHistItem/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <cmn:ViewActivityIndicator   IsVisible="{Binding IsBussy}" Grid.Row="0" Grid.RowSpan="2"/>
+        
+    </Grid>
+
+
+
+</local:PageBase>

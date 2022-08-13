@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MukaiTablet2.View.Common.ViewIndexBox">
+    <ContentView.Resources>
+        
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="Default"/>
+        </Style>
+    </ContentView.Resources>
+    <Grid x:Name="GridMain" VerticalOptions="Center" HorizontalOptions="Center" ColumnSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <BoxView x:Name="BvTag"  Grid.Column="0" BackgroundColor="Red" CornerRadius="10,0,10,0"/>
+        <BoxView Grid.Column="1" BackgroundColor="{StaticResource ColorGray3}" />
+        <Label x:Name="LblName" Grid.Column="1" d:Text="TEST"/>
+        <BoxView Grid.Column="2" BackgroundColor="{StaticResource ColorGray3}" CornerRadius="0,10,0,10"/>
+        <Button x:Name="BtnAccept"  Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource StyleTransparentButton}"/>
+    </Grid>
+
+
+</ContentView>

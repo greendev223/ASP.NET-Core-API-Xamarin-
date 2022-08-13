@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vc="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel.Common"
+             mc:Ignorable="d"
+             x:Class="MukaiTablet2.View.Common.ViewProduct">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <vc:BooleanInverter x:Key="BooleanInverter"/>
+        </ResourceDictionary>
+        <Style TargetType="Grid">
+            <Setter Property="ColumnSpacing" Value="0"/> 
+            <Setter Property="RowSpacing" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+    </ContentView.Resources>
+    <d:ContentView.BindingContext>
+        <vm:VmProduct/>
+    </d:ContentView.BindingContext>
+
+    <Grid BackgroundColor="{StaticResource ColorGray2}">
+        <Grid.RowDefinitions>
+            <!--Row0アイコン Row0-1 Pict Row2 Info-->
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116" />
+        </Grid.ColumnDefinitions>
+        <!--アイコン-->
+        <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding Image}"  VerticalOptions="FillAndExpand" HeightRequest="168"/>
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalOptions" Value="Center"/>
+                    <Setter Property="VerticalOptions" Value="Center"/>
+                    <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeNormal}"/>
+                </Style>
+            </Grid.Resources>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Spacing="0">
+                <Grid HeightRequest="15" IsVisible="{Binding IsNew}" BackgroundColor="#AAF1190F" WidthRequest="20">
+                    <Label Text="New"/>
+                </Grid>
+                <Grid BackgroundColor="#deb926" Margin="6,2,0,0" IsVisible="{Binding IsBookmark}">
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="15" HeightRequest="15"  Text="★"  TextColor="White" FontSize="{StaticResource FontSizeNormal}"/> 
+                </Grid>
+                <Grid WidthRequest="15" HeightRequest="15" IsVisible="{Binding HasOrder}" BackgroundColor="#AA8e44ad">
+                    <Label Text="{Binding OrderedNum}"/>
+                </Grid>
+
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="0">
+                <Grid WidthRequest="15" HeightRequest="15" IsVisible="{Binding IsEnd}" BackgroundColor="#AAFF0000">
+                    <Label Text="廃" />
+                </Grid>
+                <Grid WidthRequest="15" HeightRequest="15" IsVisible="{Binding IsOos}" BackgroundColor="#AA0000FF">
+                    <Label Text="欠" />
+                </Grid>
+                <Grid WidthRequest="15" HeightRequest="15" IsVisible="{Binding IsLim}" BackgroundColor="#AAd35400">
+                    <Label Text="限" />
+                </Grid>
+                <Grid WidthRequest="15" HeightRequest="15" IsVisible="{Binding IsAcc}" BackgroundColor="#AA008000">
+                    <Label Text="残" />
+                </Grid>
+
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="2" BackgroundColor="{StaticResource ColorGray3}" Padding="2" ColumnSpacing="0" RowSpacing="0">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeS}"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6.5*"/>
+                <ColumnDefinition Width="3.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Text="{Binding DpGname1}" TextColor="{StaticResource ColorGray6}" LineBreakMode="TailTruncation" FontSize="11"/>
+            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" Text="{Binding Upprice,StringFormat='￥{0:#,0}'}" TextColor="{StaticResource ColorGray6}" FontSize="11"/>
+            <StackLayout Padding="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="0" HorizontalOptions="Start">
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </StackLayout.Resources>
+                <Label Text="{Binding MakerNo}" />
+                <Label Text="("/>
+                <Label Text="{Binding Vecode}" />
+                <Label Text=")"/>
+            </StackLayout>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="EndAndExpand" Text="{Binding DpGname2}" TextColor="{StaticResource ColorGray6}" FontSize="11" />
+            <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="EndAndExpand" Text="{Binding AvgString}" TextColor="{StaticResource ColorGray6}" FontSize="11" />
+        </Grid>
+
+        <Button x:Name="BtnProduct" Grid.Row="0" Grid.RowSpan="3" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandSelect}"/>
+
+    </Grid>
+</ContentView>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="MukaiTablet2.View.ViewOrderHistItem">
+    <d:ContentView.BindingContext>
+        <vm:VmOrderHistoryItem/>
+    </d:ContentView.BindingContext>
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLL}"/>
+        </Style>
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="{Binding Height}"/>
+        </Grid.RowDefinitions>
+        <Label Text="{Binding OrderDateTime}"/>
+        <flv:FlowListView
+            Grid.Row="1"
+            FlowColumnCount="{Binding ItemColNum}"
+            SeparatorVisibility="None"
+            FlowItemsSource="{Binding OrderList}"
+            HorizontalOptions="FillAndExpand"
+            Margin="0,0,0,15">
+            <flv:FlowListView.FlowColumnTemplate>
+                <DataTemplate>
+                    <Grid
+                        RowSpacing="0"
+                        ColumnSpacing="0">
+                        <cmn:ViewProduct BindingContext="{Binding .}" Padding="2" HorizontalOptions="CenterAndExpand"/>
+                    </Grid>
+                </DataTemplate>
+            </flv:FlowListView.FlowColumnTemplate>
+        </flv:FlowListView>
+    </Grid>
+
+
+</ContentView>

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"    
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             x:Class="MukaiTablet2.View.PageTop" BackgroundColor="#212121">
+    <d:ContentPage.BindingContext>
+        <vm:VmTop/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid x:Name="grid_MenuItem" Margin="0,25,0,0" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="12*" />
+        </Grid.RowDefinitions>
+        <StackLayout HorizontalOptions="Center" IsVisible="{Binding IsSwitchAccountVisible}"  Grid.Row="0" Margin="10" Orientation="Vertical" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer  Command="{Binding CommandSwitchAccount}"/>
+            </StackLayout.GestureRecognizers>
+            <ImageButton BackgroundColor="Transparent" x:Name="btn_change_account" Command="{Binding CommandSwitchAccount}" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="Center">
+                <ImageButton.Source>
+                    <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0019;" />
+                </ImageButton.Source>
+            </ImageButton>
+            <Label Text="アカウント切り替え" VerticalTextAlignment="Center" FontSize="12" HorizontalOptions="Center"  />
+        </StackLayout>
+        <FlexLayout 
+            Grid.Row="1"
+            x:Name="flexLayout"
+             Wrap="Wrap"
+             VerticalOptions="Start"
+             Direction="Row"
+             HorizontalOptions="Center"
+             JustifyContent="Start"
+             AlignItems="Start"
+             AlignContent="Start">
+
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandLedger}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent" ClassId ="btn_ledger" x:Name="btn_ledger" Command="{Binding CommandLedger}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF00BE;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="編集台帳" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandFavorite}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent"   ClassId = "btn_favorite" x:Name="btn_favorite" Command="{Binding CommandFavorite}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0A73;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="お気に入り" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandOrderChart}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent"   ClassId = "btn_cart" x:Name="btn_cart" Command="{Binding CommandOrderChart}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0111;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="発注カート" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandOrderCHistory}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent"   ClassId ="btn_history" x:Name="btn_history" Command="{Binding CommandOrderCHistory}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF02DA;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="発注履歴" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandReport}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent"   ClassId="btn_daily_report" x:Name="btn_daily_report" Command="{Binding CommandReport}" WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}"  FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF09EE;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="売上日報" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+            <StackLayout Scale="{Binding MenuItemScale}" HeightRequest="{ Binding MenuItemHeightRequest }" WidthRequest="{ Binding MenuItemWidthRequest }" VerticalOptions="Center" Orientation="Vertical">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommandSetting}"/>
+                </StackLayout.GestureRecognizers>
+                <ImageButton BackgroundColor="Transparent"   ClassId="btn_setting" x:Name="btn_setting" Command="{Binding CommandSetting}"  WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Color="{StaticResource ColorGray5}" FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0493;" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <Label Text="設定" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center"  />
+            </StackLayout>
+
+        </FlexLayout>
+
+        <Grid RowSpacing="0" Grid.Row="2" HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalOptions="Center" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Margin="5,0,0,0" Grid.Column="0" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Image.Source>
+                        <FontImageSource Color="#FF3D3D3D"  FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF009A;"/>
+                    </Image.Source>
+                </Image>
+                <Label  Margin="0,0,0,0" Grid.Column="1" Text="お知らせ" VerticalTextAlignment="Center" FontSize="Small" HorizontalOptions="Start" />
+
+            </Grid>
+            <ListView Grid.Row="1" x:Name="listView_Rss" ItemSelected="RssOnItemSelected" RowHeight="60">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="5,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout BackgroundColor="#FF3D3D3D" Grid.Column="0"  Padding="5,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                                        <Label Text="{ Binding PublishDate}" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="Center" />
+                                        <Label Text="{ Binding PublishTime }" VerticalTextAlignment="Center" FontSize="Default" HorizontalOptions="End"  />
+                                    </StackLayout>
+                                    <Label Grid.Column="1" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2" Text="{Binding Title}" VerticalTextAlignment="Start" />
+                                    <Label Text="{ Binding FeedUrl}" IsVisible="false" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2" VerticalTextAlignment="Start" />
+                                </Grid>
+                                <!--space-->
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <!--cover-->
+        <Grid Grid.RowSpan="4" IsVisible="{Binding IsSwitchAccountDialogVisible}"  BackgroundColor="Black" Opacity="0.7"/>
+
+        <!-- 切り替えダイアログ -->
+        <Grid Grid.RowSpan="3" IsVisible="{Binding IsSwitchAccountDialogVisible}">
+            <Grid  WidthRequest="300" HeightRequest="300" VerticalOptions="Center" HorizontalOptions="Center" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <BoxView  Grid.RowSpan="3"  BackgroundColor="#656565" CornerRadius="10" />
+                <Label Grid.Row="0" Text="ログイン中アカウント" FontSize="{StaticResource FontSizeL}" HorizontalOptions="Center" Margin="0,10,0,10" VerticalOptions="Center"/>
+                <ListView ItemSelected="AccountOnItemSelected" RowHeight="50" ItemsSource="{Binding LoginAccountList}" Grid.Row="1" x:Name="listView_account" BackgroundColor="#7D7D7D">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="{Binding Background}" Padding="5,0" VerticalOptions="Center" Orientation="Vertical">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image BackgroundColor="Transparent" Margin="5,0,0,0"  Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                                            <Image.Source>
+                                                <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0004;"/>
+                                            </Image.Source>
+                                        </Image>
+                                        <Label VerticalOptions="Center" Text="{Binding StoreName}" Grid.Column="1" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                        <Label IsVisible="False" VerticalOptions="Center" Text="{Binding AccountName}" Grid.Column="1" FontSize="Default" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                        <Button BackgroundColor="Transparent" Command="{Binding CommandSelectAccount}"/>
+                                    </Grid>
+                                    <!--space-->
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Margin="0,10,0,10" CornerRadius="5" Grid.Column="1" VerticalOptions="Center" BackgroundColor="{StaticResource ColorGray6}" Text="閉じる" TextColor="{StaticResource ColorGray2}" Command="{Binding CommandCloseSwitchAccount}" />
+                </Grid>
+                
+            </Grid>
+        </Grid>
+
+    </Grid>
+</local:PageBase>

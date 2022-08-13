@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             xmlns:cmv="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"  
+             x:Class="MukaiTablet2.View.PageSetting">
+    <d:ContentPage.BindingContext>
+        <vm:VmSetting/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+        </Style>
+        <Style x:Key="SettingName" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray6}"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeL}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Key="SettingValue" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray4}"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeL}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        
+        <cmv:IsInternetConnectPresenter x:Key="IsInternetConnectPresenter"/>
+
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource ColorGray1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <cmn:ViewHeader Grid.Row="0" BindingContext="{Binding Header}"/>
+        
+        <StackLayout Grid.Row="1" Padding="30" Spacing="20">
+            <Label Text="各種情報" FontSize="{StaticResource FontSizeLL}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Text="インターネット接続" Grid.Column="0" Style="{StaticResource SettingName}"/>
+                <Label Text="{Binding IsInternetConnect,Converter={StaticResource IsInternetConnectPresenter}}" Grid.Column="1" Style="{StaticResource SettingValue}"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Text="画像の最終更新日" Grid.Column="0" Style="{StaticResource SettingName}"/>
+                <Label Text="{Binding ImageLastUpdateTime }" Grid.Column="1" Style="{StaticResource SettingValue}"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Text="データの最終更新日" Grid.Column="0" Style="{StaticResource SettingName}"/>
+                <Label Text="{Binding DataLastUpdateTime }" Grid.Column="1" Style="{StaticResource SettingValue}"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Text="ログイン中の店舗" Grid.Column="0" Style="{StaticResource SettingName}"/>
+                <Label Text="{Binding LoginStore}" Grid.Column="1" Style="{StaticResource SettingValue}"/>
+            </Grid>
+
+            <BoxView HeightRequest="1" Color="{StaticResource ColorGray4}"/>
+            <Grid ColumnSpacing="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{cmn:ImageResource MukaiTablet2.Images.force_download.png}"/>
+                <Label Grid.Column="1" Text="データを強制ダウンロード" Style="{StaticResource SettingName}"/>
+                <Button Grid.ColumnSpan="2" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandForceDownload}"/>
+            </Grid>
+            <BoxView HeightRequest="1" Color="{StaticResource ColorGray4}"/>
+            <Grid ColumnSpacing="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{cmn:ImageResource MukaiTablet2.Images.initialize.png}"/>
+                <Label Grid.Column="1" Text="初期化する" Style="{StaticResource SettingName}"/>
+                <Button Grid.ColumnSpan="2" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandInitialize}"/>
+            </Grid>
+            <BoxView HeightRequest="1" Color="{StaticResource ColorGray4}"/>
+            <Grid ColumnSpacing="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="5,0,0,0"  Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Image.Source>
+                        <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0014;"/>
+                    </Image.Source>
+                </Image>
+                <Label Grid.Column="1" Text="アカウント追加" Style="{StaticResource SettingName}"/>
+                <Button Grid.ColumnSpan="2" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandAddAccount}"/>
+            </Grid>
+            <BoxView HeightRequest="1" Color="{StaticResource ColorGray4}"/>
+            <Grid ColumnSpacing="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="5,0,0,0"  Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Image.Source>
+                        <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="&#xF0343;"/>
+                    </Image.Source>
+                </Image>
+                <Label Grid.Column="1" Text="ログアウト" Style="{StaticResource SettingName}"/>
+                <Button Grid.ColumnSpan="2" Style="{StaticResource StyleTransparentButton}" Command="{Binding CommandLogout}"/>
+            </Grid>
+
+            <BoxView HeightRequest="1" Color="{StaticResource ColorGray4}"/>
+        </StackLayout>
+        <cmn:ViewActivityIndicator IsVisible="{Binding IsBussy}" Grid.Row="0" Grid.RowSpan="2"/>
+    </Grid>
+
+</local:PageBase>

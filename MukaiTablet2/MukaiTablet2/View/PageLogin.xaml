@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             x:Class="MukaiTablet2.View.PageLogin">
+    <d:ContentPage.BindingContext>
+        <vm:VmLogin/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray5}"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="150"/>
+        </Style>
+
+
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource ColorGray0}">
+
+        <Grid Padding="50,10" VerticalOptions="Center" >
+            <BoxView BackgroundColor="{StaticResource ColorGray1}" CornerRadius="20"/>
+            <Grid Padding="50,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="ユーザ名" VerticalOptions="End"/>
+                <Entry Grid.Row="1" Text="{Binding UserName}" />
+                <Label Grid.Row="2" Text="パスワード" VerticalOptions="End"/>
+                <Entry Grid.Row="3" Text="{Binding Password}" IsPassword="True"/>
+                <Button Grid.Row="4" x:Name="BtnLogin" Command="{Binding CommandLogin}" Text="ログイン" />
+            </Grid>
+        </Grid>
+
+        <cmn:ViewActivityIndicator IsVisible="{Binding IsBussy}"  />
+    </Grid>
+
+</local:PageBase>

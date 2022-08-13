@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MukaiTablet2.View"
+             xmlns:vc="clr-namespace:MukaiTablet2.View.Converter"
+             xmlns:vmcmn="clr-namespace:MukaiTablet2.ViewModel.Common"
+             mc:Ignorable="d"
+             x:Class="MukaiTablet2.View.ViewOrderItem">
+    <d:ContentView.BindingContext>
+        <vmcmn:VmProduct/>
+    </d:ContentView.BindingContext>
+    
+
+    
+</ContentView>

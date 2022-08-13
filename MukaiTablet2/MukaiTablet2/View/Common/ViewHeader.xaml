@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:MukaiTablet2.ViewModel.Common"
+             xmlns:cmn="clr-namespace:MukaiTablet2.View.Common"
+             x:Class="MukaiTablet2.View.Common.ViewHeader"
+             HeightRequest="64" >
+    <d:ContentView.BindingContext>
+        <vm:VmHeader/>
+    </d:ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorGray3}"/>
+            <Setter Property="Padding" Value="0,4"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Title"/>
+            <Setter Property="HorizontalOptions"  Value="Center"/>
+            <Setter Property="VerticalOptions"  Value="Center"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorGray5}"/>
+        </Style>
+        <Style TargetType="ImageButton">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+              
+    </ContentView.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <ImageButton x:Name="BtnBack" Grid.Column="0" Source="{cmn:ImageResource MukaiTablet2.Images.back.png}" Command="{Binding CommandBack}" IsVisible="{Binding UseBackButton}"/>
+        
+        <Label Grid.Column="1" Text="{Binding Title}" >
+            <d:Label.Text>Title</d:Label.Text>
+        </Label>
+        <ImageButton x:Name="BtnSeach" Grid.Column="2" Source="{cmn:ImageResource MukaiTablet2.Images.search.png}" Command="{Binding CommandSearch}" IsVisible="{Binding UseSeachButton}"/>
+        <Label Grid.Column="2" Text="&#xF01D9;" FontFamily="{DynamicResource MaterialFontFamily}" IsVisible="{Binding UseSubMenu}" FontSize="{StaticResource FontSizeLLL}"/>
+        <Button Style="{StaticResource StyleTransparentButton}" Grid.Column="2" IsVisible="{Binding UseSubMenu}" Command="{Binding CommandSubMenu}" />
+        <ImageButton Grid.Column="2"  Command = "{Binding CommandAdd }" IsVisible="{Binding UseAddButton}" VerticalOptions="Start" Margin="5,0,0,0">
+            <ImageButton.Source>
+                <FontImageSource Color="{StaticResource ColorGray5}"  FontFamily="{DynamicResource Key=MaterialFontFamily}" Glyph="&#xF0257;"/>
+            </ImageButton.Source>
+        </ImageButton>
+    </Grid>
+</ContentView>
